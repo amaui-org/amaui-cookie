@@ -1,25 +1,18 @@
 /* tslint:disable: no-shadowed-variable */
 import { assert } from '@amaui/test';
 
-import { startBrowsers, IBrowsers, evaluate, closeBrowsers } from '../utils/js/test/utils';
+import { evaluate } from '../utils/js/test/utils';
 
 group('@amaui/cookie', () => {
-  let browsers: IBrowsers;
-
-  pre(async () => browsers = await startBrowsers());
 
   preTo(async () => {
-    await evaluate((window: any) => window.AmauiCookie.clear, { browsers });
-  });
-
-  post(async () => {
-    await closeBrowsers(browsers);
+    await evaluate((window: any) => new window.AmauiCookie().clear);
   });
 
   group('AmauiCookie', () => {
 
     preTo(async () => {
-      await evaluate((window: any) => window.AmauiCookie.clear, { browsers });
+      await evaluate((window: any) => window.AmauiCookie.clear,);
     });
 
     to('cookie', async () => {
@@ -31,7 +24,7 @@ group('@amaui/cookie', () => {
         amauiCookie.add('ad', 4);
 
         return window.AmauiCookie.cookie;
-      }, { browsers });
+      });
       const values = [...valueBrowsers];
 
       values.forEach(value => {
@@ -52,7 +45,7 @@ group('@amaui/cookie', () => {
         window.AmauiCookie.clear;
 
         return window.AmauiCookie.cookie;
-      }, { browsers });
+      });
       const values = [...valueBrowsers];
 
       values.forEach(value => {
@@ -65,17 +58,17 @@ group('@amaui/cookie', () => {
   group('options', () => {
 
     preTo(async () => {
-      await evaluate((window: any) => window.AmauiCookie.clear, { browsers });
+      await evaluate((window: any) => window.AmauiCookie.clear,);
     });
 
     group('namespace', () => {
 
       preTo(async () => {
-        await evaluate((window: any) => window.AmauiCookie.clear, { browsers });
+        await evaluate((window: any) => window.AmauiCookie.clear,);
       });
 
       to('default', async () => {
-        const valueBrowsers = await evaluate((window: any) => new window.AmauiCookie().namespace, { browsers });
+        const valueBrowsers = await evaluate((window: any) => new window.AmauiCookie().namespace,);
         const values = [...valueBrowsers];
 
         values.forEach(value => {
@@ -84,7 +77,7 @@ group('@amaui/cookie', () => {
       });
 
       to('namespace', async () => {
-        const valueBrowsers = await evaluate((window: any) => new window.AmauiCookie({ namespace: 'a' }).namespace, { browsers });
+        const valueBrowsers = await evaluate((window: any) => new window.AmauiCookie({ namespace: 'a' }).namespace,);
         const values = [...valueBrowsers];
 
         values.forEach(value => {
@@ -93,7 +86,7 @@ group('@amaui/cookie', () => {
       });
 
       to('namespace_separator', async () => {
-        const valueBrowsers = await evaluate((window: any) => new window.AmauiCookie({ namespace_separator: ',' }).namespace, { browsers });
+        const valueBrowsers = await evaluate((window: any) => new window.AmauiCookie({ namespace_separator: ',' }).namespace,);
         const values = [...valueBrowsers];
 
         values.forEach(value => {
@@ -110,7 +103,7 @@ group('@amaui/cookie', () => {
           amauiCookie.add('ad', 4);
 
           return window.AmauiCookie.cookie;
-        }, { browsers });
+        });
         const values = [...valueBrowsers];
 
         values.forEach(value => {
@@ -134,7 +127,7 @@ group('@amaui/cookie', () => {
       amauiCookie.add('ad', 4);
 
       return amauiCookie.properties;
-    }, { browsers });
+    });
     const values = [...valueBrowsers];
 
     values.forEach(value => {
@@ -151,7 +144,7 @@ group('@amaui/cookie', () => {
       amauiCookie.add('ad', 4);
 
       return amauiCookie.values;
-    }, { browsers });
+    });
     const values = [...valueBrowsers];
 
     values.forEach(value => {
@@ -168,7 +161,7 @@ group('@amaui/cookie', () => {
       amauiCookie.add('ad', 4);
 
       return amauiCookie.items;
-    }, { browsers });
+    });
     const values = [...valueBrowsers];
 
     values.forEach(value => {
@@ -188,16 +181,17 @@ group('@amaui/cookie', () => {
       amauiCookie.add('ab', 4);
       amauiCookie.add('ad', 4);
 
-      window.document.cookie = `a=4`;
+      window.document.cookie = `AMAUI_a=4`;
 
       amauiCookie.clear;
 
       return window.AmauiCookie.cookie;
-    }, { browsers });
+    });
+
     const values = [...valueBrowsers];
 
     values.forEach(value => {
-      assert(value).eq('a=4');
+      assert(value).eq('');
     });
   });
 
@@ -208,7 +202,7 @@ group('@amaui/cookie', () => {
       amauiCookie.add('a', 'a');
 
       return amauiCookie.get('a');
-    }, { browsers });
+    });
     const values = [...valueBrowsers];
 
     values.forEach(value => {
@@ -223,7 +217,7 @@ group('@amaui/cookie', () => {
       amauiCookie.add('a', 'a');
 
       return amauiCookie.has('a');
-    }, { browsers });
+    });
     const values = [...valueBrowsers];
 
     values.forEach(value => {
@@ -240,7 +234,7 @@ group('@amaui/cookie', () => {
         amauiCookie.add('a', 'a');
 
         return [amauiCookie.get('a'), window.document.cookie.indexOf('AMAUI_a=a') > -1];
-      }, { browsers });
+      });
       const values = [...valueBrowsers];
 
       values.forEach(value => {
@@ -258,7 +252,7 @@ group('@amaui/cookie', () => {
         amauiCookie.add('ao', { a: 'a' });
 
         return [amauiCookie.get('a'), amauiCookie.get('ay'), amauiCookie.get('au'), window.document.cookie.split('; ')[2], amauiCookie.get('ao')];
-      }, { browsers });
+      });
       const values = [...valueBrowsers];
 
       values.forEach(value => {
@@ -276,7 +270,7 @@ group('@amaui/cookie', () => {
       amauiCookie.update('a', 'a');
 
       return [amauiCookie.get('a'), window.document.cookie.indexOf('AMAUI_a=a') > -1];
-    }, { browsers });
+    });
     const values = [...valueBrowsers];
 
     values.forEach(value => {
@@ -293,7 +287,7 @@ group('@amaui/cookie', () => {
       amauiCookie.remove('a');
 
       return [amauiCookie.get('a'), window.document.cookie];
-    }, { browsers });
+    });
     const values = [...valueBrowsers];
 
     values.forEach(value => {
