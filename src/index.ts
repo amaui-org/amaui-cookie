@@ -1,3 +1,1 @@
-import { default as AmauiCookie } from './amaui-cookie';
-
-export default AmauiCookie;
+export { default } from './amaui-cookie';

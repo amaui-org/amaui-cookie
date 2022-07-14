@@ -1,5 +1,9 @@
-import { is, merge, serialize, isEnvironment, parse } from '@amaui/utils';
-import { add } from '@amaui/date';
+import is from '@amaui/utils/is';
+import isEnvironment from '@amaui/utils/isEnvironment';
+import merge from '@amaui/utils/merge';
+import serialize from '@amaui/utils/serialize';
+import parse from '@amaui/utils/parse';
+import add from '@amaui/date/add';
 
 export interface IOptions {
   namespace?: string;
