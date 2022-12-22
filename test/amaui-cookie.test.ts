@@ -90,7 +90,7 @@ group('@amaui/cookie', () => {
         const values = [...valueBrowsers];
 
         values.forEach(value => {
-          assert(value).eq('AMAUI,');
+          assert(value).eq('amaui,');
         });
       });
 

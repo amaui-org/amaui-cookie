@@ -11,7 +11,7 @@ export interface IOptions {
 }
 
 const optionsDefault: IOptions = {
-  namespace: 'AMAUI',
+  namespace: 'amaui',
   namespace_separator: '_',
 };
 
