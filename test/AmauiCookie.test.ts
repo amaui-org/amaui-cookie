@@ -3,7 +3,7 @@ import { assert } from '@amaui/test';
 
 import { evaluate } from '../utils/js/test/utils';
 
-group('@amaui/cookie', () => {
+group('AmauiCookie', () => {
 
   preTo(async () => {
     await evaluate((window: any) => new window.AmauiCookie().clear);

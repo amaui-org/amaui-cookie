@@ -1,1 +1,1 @@
-export { default } from './amaui-cookie';
+export { default } from './AmauiCookie';
