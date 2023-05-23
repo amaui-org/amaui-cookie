@@ -12,7 +12,7 @@ group('AmauiCookie', () => {
   group('AmauiCookie', () => {
 
     preTo(async () => {
-      await evaluate((window: any) => window.AmauiCookie.clear,);
+      await evaluate((window: any) => window.AmauiCookie.clear);
     });
 
     to('cookie', async () => {
@@ -28,7 +28,7 @@ group('AmauiCookie', () => {
       const values = [...valueBrowsers];
 
       values.forEach(value => {
-        assert(value).eql('AMAUI_a=a; AMAUI_ab=4; AMAUI_ad=4');
+        assert(value).eql('amaui_a=a; amaui_ab=4; amaui_ad=4');
       });
     });
 
@@ -58,26 +58,26 @@ group('AmauiCookie', () => {
   group('options', () => {
 
     preTo(async () => {
-      await evaluate((window: any) => window.AmauiCookie.clear,);
+      await evaluate((window: any) => window.AmauiCookie.clear);
     });
 
     group('namespace', () => {
 
       preTo(async () => {
-        await evaluate((window: any) => window.AmauiCookie.clear,);
+        await evaluate((window: any) => window.AmauiCookie.clear);
       });
 
       to('default', async () => {
-        const valueBrowsers = await evaluate((window: any) => new window.AmauiCookie().namespace,);
+        const valueBrowsers = await evaluate((window: any) => new window.AmauiCookie().namespace);
         const values = [...valueBrowsers];
 
         values.forEach(value => {
-          assert(value).eq('AMAUI_');
+          assert(value).eq('amaui_');
         });
       });
 
       to('namespace', async () => {
-        const valueBrowsers = await evaluate((window: any) => new window.AmauiCookie({ namespace: 'a' }).namespace,);
+        const valueBrowsers = await evaluate((window: any) => new window.AmauiCookie({ namespace: 'a' }).namespace);
         const values = [...valueBrowsers];
 
         values.forEach(value => {
@@ -86,7 +86,7 @@ group('AmauiCookie', () => {
       });
 
       to('namespace_separator', async () => {
-        const valueBrowsers = await evaluate((window: any) => new window.AmauiCookie({ namespace_separator: ',' }).namespace,);
+        const valueBrowsers = await evaluate((window: any) => new window.AmauiCookie({ namespace_separator: ',' }).namespace);
         const values = [...valueBrowsers];
 
         values.forEach(value => {
@@ -108,8 +108,8 @@ group('AmauiCookie', () => {
 
         values.forEach(value => {
           assert(value).one.eq([
-            'AMAUI_a=a; AMAUI_ab=4; AMAUI_ad=4',
-            'AMAUI_ab=4; AMAUI_ad=4; AMAUI_a=a'
+            'amaui_a=a; amaui_ab=4; amaui_ad=4',
+            'amaui_ab=4; amaui_ad=4; amaui_a=a'
           ]);
         });
       });
@@ -181,7 +181,7 @@ group('AmauiCookie', () => {
       amauiCookie.add('ab', 4);
       amauiCookie.add('ad', 4);
 
-      window.document.cookie = `AMAUI_a=4`;
+      window.document.cookie = `amaui_a=4`;
 
       amauiCookie.clear;
 
@@ -233,7 +233,7 @@ group('AmauiCookie', () => {
 
         amauiCookie.add('a', 'a');
 
-        return [amauiCookie.get('a'), window.document.cookie.indexOf('AMAUI_a=a') > -1];
+        return [amauiCookie.get('a'), window.document.cookie.indexOf('amaui_a=a') > -1];
       });
       const values = [...valueBrowsers];
 
@@ -256,7 +256,7 @@ group('AmauiCookie', () => {
       const values = [...valueBrowsers];
 
       values.forEach(value => {
-        assert(value).eql(['a', true, [1, 4], 'AMAUI_au=[1,4]', { a: 'a' }]);
+        assert(value).eql(['a', true, [1, 4], 'amaui_au=[1,4]', { a: 'a' }]);
       });
     });
 
@@ -269,7 +269,7 @@ group('AmauiCookie', () => {
       amauiCookie.add('a', 4);
       amauiCookie.update('a', 'a');
 
-      return [amauiCookie.get('a'), window.document.cookie.indexOf('AMAUI_a=a') > -1];
+      return [amauiCookie.get('a'), window.document.cookie.indexOf('amaui_a=a') > -1];
     });
     const values = [...valueBrowsers];
 
