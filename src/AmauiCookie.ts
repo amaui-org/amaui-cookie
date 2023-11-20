@@ -3,7 +3,6 @@ import isEnvironment from '@amaui/utils/isEnvironment';
 import merge from '@amaui/utils/merge';
 import serialize from '@amaui/utils/serialize';
 import parse from '@amaui/utils/parse';
-import add from '@amaui/date/add';
 
 export interface IOptions {
   namespace?: string;
@@ -92,7 +91,7 @@ class AmauiCookie {
     if (isEnvironment('browser')) {
       const name = this.property(name_);
       const value = !is('string', value_) ? serialize(value_) : value_;
-      const expires = add(days, 'day').utc;
+      const expires = (new Date(Date.now() + 86400 * 1000 * days)).toUTCString();
 
       document.cookie = `${name}=${value}; expires=${expires}; path=${path}`;
     }
